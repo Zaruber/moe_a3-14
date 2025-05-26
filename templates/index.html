@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildberries API - Документация</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <!-- Верхняя навигационная панель -->
+    <nav class="top-navbar">
+        <a href="/" class="site-logo">
+            <i class="fas fa-shopping-cart"></i>
+            <span>WB API</span>
+        </a>
+        
+        <div class="nav-search">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Поиск..." />
+        </div>
+        
+        <div class="nav-links">
+            <a href="/" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span class="nav-link-text">Главная</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="nav-link-text">Встреча с нами</span>
+            </a>
+            <a href="#" class="btn-try">Попробовать бесплатно</a>
+        </div>
+    </nav>
+    
+    <!-- Основной контейнер -->
+    <div class="main-container">
+        <!-- Боковая панель -->
+        <aside class="sidebar">
+            <div class="sidebar-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Поиск" />
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Интеграция</div>
+                <a href="#" class="sidebar-item">Начало работы</a>
+                <a href="#" class="sidebar-item">Конфигурация API</a>
+                <a href="#" class="sidebar-item">Клиентские SDK</a>
+                <a href="#" class="sidebar-item active">HTTP API</a>
+                <a href="#" class="sidebar-item">Авторизация</a>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Документация API</div>
+                <a href="#product" class="sidebar-item">Товары</a>
+                <a href="#position" class="sidebar-item">Позиции</a>
+                <a href="#tracking" class="sidebar-item">Отслеживание</a>
+                <a href="#history" class="sidebar-item">История</a>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Поддержка</div>
+                <a href="#" class="sidebar-item">Диагностика</a>
+                <a href="#" class="sidebar-item">FAQ</a>
+            </div>
+        </aside>
+        
+        <!-- Основной контент -->
+        <main class="content">
+            <div class="api-header">
+                <div class="api-version">
+                    <span class="version-tag">V1.0.0</span>
+                    <span class="version-tag">WB API 2.0</span>
+                </div>
+                <h1 class="api-title">Wildberries API</h1>
+                <p class="api-description">
+                    API для анализа товаров и позиций в поисковой выдаче Wildberries. 
+                    Позволяет получать информацию о товарах, отслеживать позиции и анализировать историю изменений.
+                </p>
+                <a href="#" class="download-link">Скачать OpenAPI Документ</a>
+            </div>
+            
+            <div class="auth-server-section">
+                <div class="server-box">
+                    <div class="box-title">Сервер</div>
+                    <div class="server-url">https://api.example.com/api</div>
+                </div>
+                
+                <div class="auth-box">
+                    <div class="box-title">Аутентификация <span>Опционально</span></div>
+                    <select class="auth-type-select">
+                        <option value="none">Без аутентификации</option>
+                        <option value="basic">Basic Auth</option>
+                        <option value="bearer">Bearer Token</option>
+                    </select>
+                    <p class="auth-message">Аутентификация не выбрана</p>
+                </div>
+            </div>
+            
+            <div class="client-libraries">
+                <div class="libraries-title">Клиентские библиотеки</div>
+                <div class="libraries-list">
+                    <div class="library-item active"><i class="fas fa-terminal"></i> Shell</div>
+                    <div class="library-item"><i class="fab fa-python"></i> Python</div>
+                    <div class="library-item"><i class="fab fa-node-js"></i> Node.js</div>
+                    <div class="library-item"><i class="fab fa-php"></i> PHP</div>
+                    <div class="library-item"><i class="fab fa-java"></i> Java</div>
+                    <div class="library-item"><i class="fas fa-code"></i> Go</div>
+                </div>
+                <div class="library-content">curl Shell</div>
+            </div>
+            
+            <!-- Раздел API эндпоинтов -->
+            <div id="product" class="endpoint-section">
+                <div class="section-header expanded">
+                    <i class="fas fa-angle-right"></i>
+                    <h2 class="section-title">Товары</h2>
+                </div>
+                
+                <div class="endpoint">
+                    <div class="endpoint-row">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/api/product/{article_id}</span>
+                    </div>
+                    <div class="endpoint-content">
+                        <p class="endpoint-description">Получает детальную информацию о товаре по его артикулу</p>
+                        
+                        <div class="params-section">
+                            <h3 class="params-title">Параметры пути</h3>
+                            <ul class="param-list">
+                                <li class="param-item">
+                                    <span class="param-name">article_id</span> - Артикул товара на Wildberries (число)
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="endpoint-example">
+                            <div class="code-tabs">
+                                <div class="code-tab active">Пример запроса</div>
+                                <div class="code-tab">Пример ответа</div>
+                            </div>
+                            
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-language">Shell</span>
+                                    <div class="code-actions">
+                                        <span class="code-action"><i class="fas fa-copy"></i></span>
+                                    </div>
+                                </div>
+                                <pre><code>GET /api/product/12345678</code></pre>
+                            </div>
+                            
+                            <div class="code-block" style="display: none;">
+                                <div class="code-header">
+                                    <span class="code-language">JSON</span>
+                                    <div class="code-actions">
+                                        <span class="code-action"><i class="fas fa-copy"></i></span>
+                                    </div>
+                                </div>
+                                <pre><code>{
+  "id": "12345678",
+  "name": "Название товара",
+  "brand": "Бренд",
+  "supplier": "Поставщик",
+  "supplierRating": 4.5,
+  "image_url": "https://example.com/image.jpg",
+  "url": "https://www.wildberries.ru/catalog/12345678/detail.aspx",
+  "prices": {
+    "current": 1500,
+    "original": 2000,
+    "discount": 25
+  },
+  "ratings": {
+    "rating": 4.8,
+    "feedbacks": 120
+  },
+  "availability": {
+    "total_quantity": 150,
+    "fbw_quantity": 100,
+    "fbs_quantity": 50,
+    "sizes": {
+      "M": 50,
+      "L": 70,
+      "XL": 30
+    },
+    "warehouses": [...]
+  },
+  "logistics": {
+    "type": "FBW",
+    "preparation_time": 1,
+    "delivery_time": 3,
+    "total_time": 4
+  }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="position" class="endpoint-section">
+                <div class="section-header">
+                    <i class="fas fa-angle-right"></i>
+                    <h2 class="section-title">Поиск позиций</h2>
+                </div>
+                
+                <div class="endpoint">
+                    <div class="endpoint-row">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/api/position</span>
+                    </div>
+                    <div class="endpoint-content">
+                        <p class="endpoint-description">Ищет позицию товара в поисковой выдаче по запросу</p>
+                        
+                        <div class="params-section">
+                            <h3 class="params-title">Параметры запроса</h3>
+                            <ul class="param-list">
+                                <li class="param-item">
+                                    <span class="param-name">sku</span> - Артикул товара (обязательный)
+                                </li>
+                                <li class="param-item">
+                                    <span class="param-name">query</span> - Поисковый запрос (обязательный)
+                                </li>
+                                <li class="param-item">
+                                    <span class="param-name">max_pages</span> - Максимальное количество страниц для поиска (по умолчанию 10)
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="endpoint-example">
+                            <div class="code-tabs">
+                                <div class="code-tab active">Пример запроса</div>
+                                <div class="code-tab">Пример ответа</div>
+                            </div>
+                            
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-language">Shell</span>
+                                    <div class="code-actions">
+                                        <span class="code-action"><i class="fas fa-copy"></i></span>
+                                    </div>
+                                </div>
+                                <pre><code>GET /api/position?sku=12345678&query=платье&max_pages=5</code></pre>
+                            </div>
+                            
+                            <div class="code-block" style="display: none;">
+                                <div class="code-header">
+                                    <span class="code-language">JSON</span>
+                                    <div class="code-actions">
+                                        <span class="code-action"><i class="fas fa-copy"></i></span>
+                                    </div>
+                                </div>
+                                <pre><code>{
+  "query": "платье",
+  "sku": "12345678",
+  "found": true,
+  "timestamp": "2023-05-25T12:34:56.789Z",
+  "page": 1,
+  "position_on_page": 5,
+  "global_position": 5,
+  "is_advertised": true,
+  "ad_type": "Аукцион",
+  "organic_position": "42",
+  "promo_position": "5",
+  "cpm": "321.5",
+  "boost_cost": 8.67,
+  "price": 1500,
+  "brand": "Бренд",
+  "name": "Название товара"
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="tracking" class="endpoint-section">
+                <div class="section-header">
+                    <i class="fas fa-angle-right"></i>
+                    <h2 class="section-title">Отслеживание позиций</h2>
+                </div>
+                
+                <div class="endpoint">
+                    <div class="endpoint-row">
+                        <span class="method post">POST</span>
+                        <span class="endpoint-path">/api/tracking</span>
+                    </div>
+                    <div class="endpoint-content">
+                        <p class="endpoint-description">Настраивает регулярное отслеживание позиции товара с заданным интервалом</p>
+                        
+                        <div class="params-section">
+                            <h3 class="params-title">Тело запроса (JSON)</h3>
+                            <div class="code-block">
+                                <pre><code>{
+  "sku": "12345678",
+  "query": "платье",
+  "interval": 60,
+  "interval_type": "minutes",
+  "max_pages": 10
+}</code></pre>
+                            </div>
+                            
+                            <h3 class="params-title">Параметры</h3>
+                            <ul class="param-list">
+                                <li class="param-item">
+                                    <span class="param-name">sku</span> - Артикул товара (обязательный)
+                                </li>
+                                <li class="param-item">
+                                    <span class="param-name">query</span> - Поисковый запрос (обязательный)
+                                </li>
+                                <li class="param-item">
+                                    <span class="param-name">interval</span> - Интервал отслеживания (по умолчанию 60)
+                                </li>
+                                <li class="param-item">
+                                    <span class="param-name">interval_type</span> - Тип интервала: "minutes" или "hours" (по умолчанию "minutes")
+                                </li>
+                                <li class="param-item">
+                                    <span class="param-name">max_pages</span> - Максимальное количество страниц для поиска (по умолчанию 10)
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="endpoint-example">
+                            <div class="code-tabs">
+                                <div class="code-tab active">Пример ответа</div>
+                            </div>
+                            
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-language">JSON</span>
+                                    <div class="code-actions">
+                                        <span class="code-action"><i class="fas fa-copy"></i></span>
+                                    </div>
+                                </div>
+                                <pre><code>{
+  "success": true,
+  "tracking_id": "123e4567-e89b-12d3-a456-426614174000",
+  "message": "Отслеживание настроено с интервалом 60 minutes"
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <div class="endpoint-row">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/api/tracking</span>
+                    </div>
+                    <div class="endpoint-content">
+                        <p class="endpoint-description">Получает список активных задач отслеживания</p>
+                        
+                        <div class="endpoint-example">
+                            <div class="code-tabs">
+                                <div class="code-tab active">Пример ответа</div>
+                            </div>
+                            
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-language">JSON</span>
+                                    <div class="code-actions">
+                                        <span class="code-action"><i class="fas fa-copy"></i></span>
+                                    </div>
+                                </div>
+                                <pre><code>{
+  "total_jobs": 2,
+  "jobs": [
+    {
+      "tracking_id": "123e4567-e89b-12d3-a456-426614174000",
+      "query": "платье",
+      "sku": "12345678",
+      "interval": 60,
+      "interval_type": "minutes",
+      "start_time": "2023-05-25T12:34:56.789Z"
+    },
+    {
+      "tracking_id": "234e5678-e89b-12d3-a456-426614174001",
+      "query": "куртка",
+      "sku": "87654321",
+      "interval": 2,
+      "interval_type": "hours",
+      "start_time": "2023-05-25T13:45:56.789Z"
+    }
+  ]
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <div class="endpoint-row">
+                        <span class="method delete">DELETE</span>
+                        <span class="endpoint-path">/api/tracking/{tracking_id}</span>
+                    </div>
+                    <div class="endpoint-content">
+                        <p class="endpoint-description">Останавливает задачу отслеживания по ID</p>
+                        
+                        <div class="params-section">
+                            <h3 class="params-title">Параметры пути</h3>
+                            <ul class="param-list">
+                                <li class="param-item">
+                                    <span class="param-name">tracking_id</span> - Идентификатор задачи отслеживания
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="endpoint-example">
+                            <div class="code-tabs">
+                                <div class="code-tab active">Пример ответа</div>
+                            </div>
+                            
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-language">JSON</span>
+                                    <div class="code-actions">
+                                        <span class="code-action"><i class="fas fa-copy"></i></span>
+                                    </div>
+                                </div>
+                                <pre><code>{
+  "success": true,
+  "message": "Отслеживание 123e4567-e89b-12d3-a456-426614174000 остановлено"
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="history" class="endpoint-section">
+                <div class="section-header">
+                    <i class="fas fa-angle-right"></i>
+                    <h2 class="section-title">История позиций</h2>
+                </div>
+                
+                <div class="endpoint">
+                    <div class="endpoint-row">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/api/history</span>
+                    </div>
+                    <div class="endpoint-content">
+                        <p class="endpoint-description">Получает историю позиций товара за указанный период</p>
+                        
+                        <div class="params-section">
+                            <h3 class="params-title">Параметры запроса</h3>
+                            <ul class="param-list">
+                                <li class="param-item">
+                                    <span class="param-name">sku</span> - Артикул товара (обязательный)
+                                </li>
+                                <li class="param-item">
+                                    <span class="param-name">query</span> - Поисковый запрос (опциональный)
+                                </li>
+                                <li class="param-item">
+                                    <span class="param-name">days</span> - Количество дней для выборки (по умолчанию 30)
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="endpoint-example">
+                            <div class="code-tabs">
+                                <div class="code-tab active">Пример запроса</div>
+                                <div class="code-tab">Пример ответа</div>
+                            </div>
+                            
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-language">Shell</span>
+                                    <div class="code-actions">
+                                        <span class="code-action"><i class="fas fa-copy"></i></span>
+                                    </div>
+                                </div>
+                                <pre><code>GET /api/history?sku=12345678&query=платье&days=7</code></pre>
+                            </div>
+                            
+                            <div class="code-block" style="display: none;">
+                                <div class="code-header">
+                                    <span class="code-language">JSON</span>
+                                    <div class="code-actions">
+                                        <span class="code-action"><i class="fas fa-copy"></i></span>
+                                    </div>
+                                </div>
+                                <pre><code>{
+  "sku": "12345678",
+  "query": "платье",
+  "days": 7,
+  "stats": {
+    "min_organic_position": 42,
+    "max_organic_position": 56,
+    "min_price": 1500,
+    "max_price": 1600,
+    "avg_cpm": 310.5,
+    "records_count": 24
+  },
+  "records": [
+    {
+      "timestamp": "2023-05-25T12:34:56.789Z",
+      "sku": "12345678",
+      "query": "платье",
+      "organic_position": "42",
+      "promo_position": "5",
+      "price": 1500,
+      "cpm": "321.5",
+      "ad_type": "Аукцион",
+      "page": 1,
+      "position_on_page": 5,
+      "boost_cost": 8.67
+    },
+    ...
+  ]
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="endpoint-section">
+                <div class="section-header">
+                    <i class="fas fa-angle-right"></i>
+                    <h2 class="section-title">Примеры использования</h2>
+                </div>
+                
+                <div class="endpoint">
+                    <div class="endpoint-row">
+                        <span class="method get">JavaScript</span>
+                    </div>
+                    <div class="endpoint-content">
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">JavaScript</span>
+                                <div class="code-actions">
+                                    <span class="code-action"><i class="fas fa-copy"></i></span>
+                                </div>
+                            </div>
+                            <pre><code>// Получение информации о товаре
+fetch('/api/product/12345678')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Ошибка:', error));
+
+// Поиск позиции товара
+fetch('/api/position?sku=12345678&query=платье')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Ошибка:', error));
+
+// Настройка отслеживания
+fetch('/api/tracking', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    sku: '12345678',
+    query: 'платье',
+    interval: 60,
+    interval_type: 'minutes'
+  })
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Ошибка:', error));</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <div class="endpoint-row">
+                        <span class="method get">Python</span>
+                    </div>
+                    <div class="endpoint-content">
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">Python</span>
+                                <div class="code-actions">
+                                    <span class="code-action"><i class="fas fa-copy"></i></span>
+                                </div>
+                            </div>
+                            <pre><code>import requests
+
+# Получение информации о товаре
+response = requests.get('http://localhost:5000/api/product/12345678')
+data = response.json()
+print(data)
+
+# Настройка отслеживания
+tracking_data = {
+    "sku": "12345678",
+    "query": "платье",
+    "interval": 60,
+    "interval_type": "minutes"
+}
+response = requests.post('http://localhost:5000/api/tracking', json=tracking_data)
+result = response.json()
+print(result)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Простой JavaScript для управления интерактивностью
+        document.addEventListener('DOMContentLoaded', function() {
+            // Переключение вкладок с кодом
+            const codeTabs = document.querySelectorAll('.code-tab');
+            codeTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const parent = this.parentElement;
+                    const tabIndex = Array.from(parent.children).indexOf(this);
+                    const codeBlocks = parent.parentElement.querySelectorAll('.code-block');
+                    
+                    // Активация выбранной вкладки
+                    parent.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Отображение выбранного блока кода
+                    codeBlocks.forEach((block, index) => {
+                        block.style.display = index === tabIndex ? 'block' : 'none';
+                    });
+                });
+            });
+            
+            // Раскрытие/скрытие секций
+            const sectionHeaders = document.querySelectorAll('.section-header');
+            sectionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                    const section = this.parentElement;
+                    const endpoints = section.querySelectorAll('.endpoint');
+                    
+                    endpoints.forEach(endpoint => {
+                        endpoint.style.display = this.classList.contains('expanded') ? 'block' : 'none';
+                    });
+                });
+                
+                // Инициализация: показываем содержимое только для развернутых секций
+                const section = header.parentElement;
+                const endpoints = section.querySelectorAll('.endpoint');
+                
+                endpoints.forEach(endpoint => {
+                    endpoint.style.display = header.classList.contains('expanded') ? 'block' : 'none';
+                });
+            });
+            
+            // Копирование кода
+            const copyButtons = document.querySelectorAll('.code-action');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const codeBlock = this.closest('.code-block');
+                    const code = codeBlock.querySelector('code').textContent;
+                    
+                    navigator.clipboard.writeText(code).then(() => {
+                        // Уведомление о копировании
+                        const originalIcon = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-check"></i>';
+                        setTimeout(() => {
+                            this.innerHTML = originalIcon;
+                        }, 2000);
+                    });
+                });
+            });
+            
+            // Переключение библиотек клиентов
+            const libraryItems = document.querySelectorAll('.library-item');
+            libraryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.library-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Здесь можно добавить логику для отображения контента выбранной библиотеки
+                    const libraryContent = document.querySelector('.library-content');
+                    libraryContent.textContent = this.textContent + ' content';
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
